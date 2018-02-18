@@ -9,6 +9,10 @@ public class EntityToDo implements Serializable {
 
     public boolean isChecked;
 
+    public String getTitle() {
+        return Util.decodeUrl(this.title);
+    }
+
     public int getPriorityColor() {
         switch (this.priority) {
             case 1:
@@ -20,5 +24,4 @@ public class EntityToDo implements Serializable {
         }
         return android.R.color.transparent;
     }
-
 }

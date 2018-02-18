@@ -41,7 +41,7 @@
             android:layout_toEndOf="@id/checkbox"
             android:focusable="false"
             android:gravity="center_vertical"
-            android:text="@{item.title}"
+            android:text="@{item.getTitle()}"
             android:textAppearance="?android:attr/textAppearanceListItem"
             android:textColor="@{viewModel.color}"
             app:flag="@{viewModel.flag}"

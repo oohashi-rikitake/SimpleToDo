@@ -1,11 +1,8 @@
 package com.rokuta96.simpletodo.Model;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 public class Util {
 
@@ -25,37 +22,25 @@ public class Util {
         }
     }
 
-    public static boolean isOnline(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected());
-    }
-
-    /**
-     * スリープラッパー
-     *
-     * @param millis ミリ秒
-     */
-    public static void sleep(int millis) {
-        Logger.d("Start mills:%d", millis);
+    public static String encodeUrl(String target) {
+        String encodedString = target;
         try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            // 処理なしで問題なし
-            Logger.w("InterruptedException", e);
+            encodedString = URLEncoder.encode(target, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            Logger.w("Exception", e);
         }
+
+        return encodedString;
     }
 
-    /**
-     * スタックトレースを文字列に変換
-     *
-     * @param e
-     * @return スタックトレース文字列
-     */
-    public static String toStringStackTrace(Throwable e) {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        e.printStackTrace(pw);
-        return sw.toString();
+    public static String decodeUrl(String target) {
+        String decodedString = target;
+        try {
+            decodedString = URLDecoder.decode(target, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            Logger.w("Exception", e);
+        }
+
+        return decodedString;
     }
 }

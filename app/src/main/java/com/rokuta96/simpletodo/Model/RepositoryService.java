@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -86,7 +84,6 @@ public class RepositoryService extends IntentService {
 
     private static void handleActionLoad() {
         createApi().listToDo()
-                .timeout(10, TimeUnit.SECONDS)
                 .blockingSubscribe(todo_list -> {
                             Logger.i("todo_num:%d", todo_list.Items.size());
                             if (handlerLoad != null) {
@@ -108,8 +105,8 @@ public class RepositoryService extends IntentService {
     }
 
     private static void handleActionAdd(int priority, String title) {
-        createApi().addToDo(priority, title)
-                .timeout(10, TimeUnit.SECONDS)
+        String encodedTitle = Util.encodeUrl(title);
+        createApi().addToDo(priority, encodedTitle)
                 .blockingSubscribe(result -> {
                             Logger.i("%s", result);
                         }, err -> Logger.w("API LOG:%s", err.getMessage()),
@@ -118,8 +115,8 @@ public class RepositoryService extends IntentService {
     }
 
     private static void handleActionUpdate(int id, int priority, String title) {
-        createApi().updateToDo(id, priority, title)
-                .timeout(10, TimeUnit.SECONDS)
+        String encodedTitle = Util.encodeUrl(title);
+        createApi().updateToDo(id, priority, encodedTitle)
                 .blockingSubscribe(result -> {
                             Logger.i("%s", result);
                         }, err -> Logger.w("API LOG:%s", err.getMessage()),
@@ -129,7 +126,6 @@ public class RepositoryService extends IntentService {
 
     private static void handleActionDelete(int id) {
         createApi().deleteToDo(id)
-                .timeout(10, TimeUnit.SECONDS)
                 .blockingSubscribe(result -> {
                             Logger.d("API LOG:%s", result);
                         }, err -> Logger.w("API LOG:%s", err.getMessage()),
