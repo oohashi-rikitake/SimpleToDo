@@ -1,5 +1,4 @@
 # SimpleToDo
-====
 
 # APIインターフェース仕様
 
