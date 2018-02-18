@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.rokuta96.simpletodo.Model.EntityToDo" />
+
+        <variable
+            name="viewModel"
+            type="com.rokuta96.simpletodo.ViewModel.ToDoListItemViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:clickable="true"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:focusable="false"
+            android:onCheckedChanged="@{viewModel.onCheckedChanged}"
+            android:paddingEnd="16dp"
+            android:paddingStart="0dp" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/checkbox"
+            android:focusable="false"
+            android:gravity="center_vertical"
+            android:text="@{item.title}"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textColor="@{viewModel.color}"
+            app:flag="@{viewModel.flag}"
+            tools:text="title" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4dp"
+            app:srcCompat="@{item.getPriorityColor()}" />
+
+    </RelativeLayout>
+</layout>

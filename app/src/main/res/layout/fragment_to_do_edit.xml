@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rokuta96.simpletodo.ViewModel.ToDoEditViewModel" />
+
+        <variable
+            name="onClickListenerAdd"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/todo_title"
+                android:onTextChanged="@{viewModel.onTextChangedTitle}"
+                android:text="@{viewModel.title}" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/todo_priority"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_gravity="end"
+                android:entries="@array/todo_priority_listname"
+                android:minWidth="300dp"
+                android:onItemSelected="@{viewModel.onItemSelectedPriority}"
+                android:selectedItemPosition="@{viewModel.spinnerPriorityPosition}" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:enabled="@{viewModel.btn_enabled}"
+                android:onClickListener="@{onClickListenerAdd}"
+                android:text="@{viewModel.btnText}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">SimpleToDo</string>
+
+    <string name="btn_add">追加</string>
+    <string name="btn_update">更新</string>
+
+    <string name="title_todoadd">ToDo 追加</string>
+    <string name="title_todoupdate">ToDo 編集</string>
+
+    <string name="todo_title">タイトル</string>
+    <string name="todo_priority">優先度</string>
+
+    <string-array name="todo_priority_listname">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>
+    <string-array name="todo_priority_listvalue" translatable="false">
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="message_no_network">ネットワーク接続できませんでした。</string>
+    <string name="message_no_item">ToDoを追加してましょう。</string>
+    <string name="message_deleted">ToDoを削除しました。</string>
+    <string name="message_undo">元に戻す</string>
+
+</resources>
