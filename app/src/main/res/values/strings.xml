@@ -22,7 +22,7 @@
     </string-array>
 
     <string name="message_no_network">ネットワーク接続できませんでした。</string>
-    <string name="message_no_item">ToDoを追加してましょう。</string>
+    <string name="message_no_item">ToDoを追加しましょう。</string>
     <string name="message_deleted">ToDoを削除しました。</string>
     <string name="message_undo">元に戻す</string>
 

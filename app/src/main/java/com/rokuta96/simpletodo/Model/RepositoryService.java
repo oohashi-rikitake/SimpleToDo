@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import java.util.HashMap;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -105,8 +107,11 @@ public class RepositoryService extends IntentService {
     }
 
     private static void handleActionAdd(int priority, String title) {
-        String encodedTitle = Util.encodeUrl(title);
-        createApi().addToDo(priority, encodedTitle)
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("priority", String.valueOf(priority));
+        hashMap.put("title", Util.encodeUrl(title));
+
+        createApi().addToDo(hashMap)
                 .blockingSubscribe(result -> {
                             Logger.i("%s", result);
                         }, err -> Logger.w("API LOG:%s", err.getMessage()),
@@ -115,8 +120,12 @@ public class RepositoryService extends IntentService {
     }
 
     private static void handleActionUpdate(int id, int priority, String title) {
-        String encodedTitle = Util.encodeUrl(title);
-        createApi().updateToDo(id, priority, encodedTitle)
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", String.valueOf(id));
+        hashMap.put("priority", String.valueOf(priority));
+        hashMap.put("title", Util.encodeUrl(title));
+
+        createApi().updateToDo(hashMap)
                 .blockingSubscribe(result -> {
                             Logger.i("%s", result);
                         }, err -> Logger.w("API LOG:%s", err.getMessage()),
